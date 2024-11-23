@@ -2,6 +2,8 @@
 ### 🎮 Overview
 Buckshot Console is a text-based console game inspired by the Steam game "Buckshot Roulette". It's a thrilling turn-based game where players take calculated risks with a shotgun loaded with blanks and real buckshots.
 The game features an AI opponent and randomized gameplay.
+![image](https://github.com/user-attachments/assets/759e607a-bf82-4a9d-bda1-477d495321a7)
+
 
 ### 🎲 Rules
 At the start of each round, the shotgun is loaded with a random mix of blanks and real shots.
