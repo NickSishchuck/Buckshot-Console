@@ -41,3 +41,14 @@ Using Visual Studio:
 Open the project in Visual Studio.
 Build and run the solution.
 Follow the on-screen instructions to play.
+
+### 🤖 AI Logic
+The AI considers:
+
+Its own health: If its health is critical, it avoids risk.
+Chamber contents: It balances risk and aggression based on blanks and real shots left.
+Randomness: Adds unpredictability to its decisions.
+
+### 📝 Future Enhancements
+Add items.
+Implement difficulty levels for the AI.
