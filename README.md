@@ -19,23 +19,23 @@ Compiler: Any C++ compiler supporting C++11 or later (e.g., GCC, MSVC, or Clang)
 Libraries: Standard C++ libraries, and <windows.h> for console coloring.
 
 ### 🚀 How to Play
-#### Clone this repository:
+Clone this repository:
 ```
 git clone https://github.com/NickSishchuck/Buckshot-Console.git
 ```
-#### Navigate to the project directory:
+Navigate to the project directory:
 ```
 cd buckshot-console
 ```
-#### Run the precompiled binary (Windows users):
-#### Navigate to the release folder and run the Buckshot Console.exe file.
+Run the precompiled binary (Windows users):
+Navigate to the release folder and run the Buckshot Console.exe file.
 
-### Alternatively, compile the project manually:
-#### Using GCC:
+Alternatively, compile the project manually:
+Using GCC:
 ```
 g++ Source.cpp AI.cpp -o BuckshotConsole
 ```
-#### Using Visual Studio:
+Using Visual Studio:
 Open the project in Visual Studio.
 Build and run the solution.
 Follow the on-screen instructions to play.
