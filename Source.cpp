@@ -1,17 +1,26 @@
 #include <iostream>
 #include <vector>
-#include <cstdlib>
 #include <ctime>
 #include "AI.h"
-#include <thread>   // For std::this_thread::sleep_for
-#include <chrono>   // For std::chrono::seconds
-#include <windows.h>
+#include <thread>
+#include <chrono>
+#include <random>
+#include <algorithm>
 
-
+// For Linux/cross-platform, replace windows.h with ANSI color codes
+#ifdef LINUX_BUILD
+    #define COLOR_RESET   "\033[0m"
+    #define COLOR_BLUE    "\033[34m"
+    #define COLOR_RED     "\033[31m"
+    #define COLOR_YELLOW  "\033[33m"
+    #define COLOR_WHITE   "\033[37m"
+#else
+    #include <windows.h>
+#endif
 
 using namespace std;
 
-// Function prototypes
+
 void displayRules();
 void initializeChamber(vector<int>& chamber, int blanks, int realShots);
 bool shoot(vector<int>& chamber, int& health, string playerName);
@@ -23,14 +32,22 @@ void waitRandomTime() {
 }
 
 void setConsoleColor(int color) {
+#ifdef LINUX_BUILD
+    switch(color) {
+        case 7:  cout << COLOR_WHITE; break;
+        case 9:  cout << COLOR_BLUE; break;
+        case 12: cout << COLOR_RED; break;
+        case 14: cout << COLOR_YELLOW; break;
+        default: cout << COLOR_RESET; break;
+    }
+#else
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, color);
+#endif
 }
 
-
-
 int main() {
-    srand(static_cast<unsigned>(time(0))); 
+    srand(static_cast<unsigned>(time(0)));
 
     const int totalBuckshots = 6;
     int blanks, realShots;
@@ -43,7 +60,7 @@ int main() {
     char choice = 'n';
     do {
 
-        blanks = rand() % (totalBuckshots - 1) + 1; 
+        blanks = rand() % (totalBuckshots - 1) + 1;
         realShots = totalBuckshots - blanks;
 
 
@@ -116,14 +133,14 @@ int main() {
                 }
                 else if (action == 2) {
 
-                   
+
 
                     cout << "Player 1 shoots the opponent...\n";
                     waitRandomTime();
                     bool isBlank = shoot(chamber, player2Health, "Player 2");
-                    if (player2Health <= 0) { // AI is dead
+                    if (player2Health <= 0) {
                         cout << "\nPlayer 2 (AI) is dead! You win!\n";
-                        break; // Exit the current game loop
+                        break;
                     }
                     if (!isBlank) {
                         currentPlayer = 2; // Pass turn to AI
@@ -168,16 +185,15 @@ int main() {
                 }
             }
 
-            // Add formatting lines
+
             cout << "_____________________" << endl;
         }
 
-        // Ask the player if they want to restart or quit
+
         char choice;
         cout << "\nDo you want to play again? (y/n): ";
         cin >> choice;
         if (choice == 'y' || choice == 'Y') {
-            // Restart the game by resetting health and chamber
             player1Health = 3;
             player2Health = 3;
 
@@ -192,12 +208,12 @@ int main() {
             setConsoleColor(7);
 
             initializeChamber(chamber, blanks, realShots);
-            currentPlayer = 1; // Reset to Player 1
-            continue; // Restart the loop
+            currentPlayer = 1;
+            continue;
         }
         else {
             cout << "Thanks for playing Buckshot Roulette! Goodbye!\n";
-            break; // Exit the outer loop
+            break;
         }
 
 
@@ -228,9 +244,6 @@ void displayRules() {
         << "5. Each player has 3 health points. Lose them all, and you're out!\n"
         << "Good luck!\n";
 }
-
-#include <random>    
-#include <algorithm> 
 
 void initializeChamber(vector<int>& chamber, int blanks, int realShots) {
     chamber.clear();

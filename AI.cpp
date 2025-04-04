@@ -1,10 +1,9 @@
 #include "AI.h"
-#include <cstdlib> // For rand
+#include <cstdlib>
 
 int aiDecision(int aiHealth, int playerHealth, const std::vector<int>& chamber) {
     int blanks = 0, realShots = 0;
 
-    // Count blanks and real shots in the chamber
     for (int shot : chamber) {
         if (shot == 0) blanks++;
         else realShots++;
@@ -12,13 +11,11 @@ int aiDecision(int aiHealth, int playerHealth, const std::vector<int>& chamber) 
 
     // AI logic
     if (aiHealth == 1) {
-        // Low health, always shoot opponent
-        return 2; // Shoot opponent
+        return 2;
     }
 
     if (blanks > realShots) {
-        // More blanks, take the risk
-        return 1; // Shoot self
+        return 1;
     }
 
     // Randomized decision (50/50)
